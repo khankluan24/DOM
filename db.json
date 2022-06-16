@@ -1,0 +1,24 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "JSON server",
+      "description": "Cập nhật tháng 2 năm 2022"
+    },
+    {
+      "name": "Học ReactJS 1m",
+      "description": "Khóa học ReactJS từ cơ bản tới nâng cao. Kết quả của khóa học này là bạn có thể làm hầu hết các dự án thường gặp với ReactJS.",
+      "id": 3
+    },
+    {
+      "name": {},
+      "description": {},
+      "id": 4
+    },
+    {
+      "name": {},
+      "description": {},
+      "id": 5
+    }
+  ]
+}
