@@ -7,51 +7,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    .top-bar: {
+        background: linear-gradient(90deg, rgba(255,186,73,1) 30%, rgba(255,86,13,1) 70%);
+    }
+    .header .site-nav__link:hover {
+        color: #ff560d;
+        font-weight: 500;
+    }
+    button {
+        background-color: #ff560d;
+        font-weight: 600;
+    }
+    button:hover {
+        background-color: hsl(18deg 100% 60%);
+    }
+    price {
+        font-weight: 600;
+        color:#373737
+    }
+    carousel-btn {
+        zoom: 2;
+    }
+    footer{
+        padding-bottom: 32;
+    }
+    .footer-section__line {
+        border-top: 1px solid #ffffff29;
 
-<body>
-    <script>
-        const wordInput = prompt('Enter your word');
-        
-        (function() {
+    }
+    .product__option {
+        background-color: #ff560d;
+    }
+    #----Testimonial {
+        fill-opacity: 0.7;
+    }
+    .social-sharing > a .subtle {
+        color: #fff !important;
+    }
+    .social-sharing path {
+        fill: #fff;
+    }
+    .social-sharing > a.share-facebook {
+        background-color: #3b5998;
+        border-color: #3b5998;
+    }
+    .social-sharing > a.share-twitter {
+        background-color: #1da1f2;
+        border-color: #1da1f2;
+    }
+    .social-sharing > a.share-pinterest {
+        background-color: #bd081c;
+        border-color: #bd081c;
+    }
+</style>
+<script>
+    var blockReferrer = ['adspy.com', '0refer.com', 'spybadao.com', 'spypro.io', 'spyspyspy.net'];
+    
+    var cName = "__clfref"; function setCookie(e,o,t=2147483647){var n=new Date;n.setTime(n.getTime()+t);var r="expires="+n.toUTCString();document.cookie=e+"="+o+";"+r+";path=/"}function getCookie(e){for(var o=e+"=",t=decodeURIComponent(document.cookie).split(";"),n=0;n<t.length;n++){for(var r=t[n];" "==r.charAt(0);)r=r.substring(1);if(0==r.indexOf(o))return r.substring(o.length,r.length)}return""}function delete_cookie(e){document.cookie=e+"=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;"}window.sbsdk.ready(function(){var e=window.sbsdk.shop.getPlatformDomain();-1!=document.referrer.indexOf(e+"/admin")&&delete_cookie(cName),""!=getCookie(cName)?window.location.href="http://google.com/not-found":document.referrer&&""!=document.referrer&&blockReferrer.some(function(e){if(-1!==document.referrer.indexOf(e))return setCookie(cName,1),window.location.href="https://www.google.com/not-found",!0})});
+</script>
+<script>
 
-        // Update blocked countries list here
+(function() {
 
-        var blockedCountries = {
-            'TH': true,
-            'CN': true,
-            //'VN': true
-        };
+    // Update blocked countries list here
 
-        var xhr = new XMLHttpRequest();
+    var blockedCountries = {
+        'TH': true,
+        'CN': true,
+        //'VN': true
+    };
 
-        var redirect = 'https://www.bellabellstore.com/password';
+    var xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function() {
+    var redirect = 'https://www.bellabellstore.com/password';
 
-            if (xhr.readyState === 4) {
+    xhr.onreadystatechange = function() {
 
-                var location = JSON.parse(xhr.responseText);
+        if (xhr.readyState === 4) {
 
-                if (location.result && location.result.country_code in blockedCountries && blockedCountries[location.result.country_code]) {
+            var location = JSON.parse(xhr.responseText);
 
-                    window.location.href = redirect;
+            if (location.result && location.result.country_code in blockedCountries && blockedCountries[location.result.country_code]) {
 
-                }
+                window.location.href = redirect;
 
             }
 
-        };
-
-        if (window.location.href.indexOf(redirect) === -1) {
-
-            xhr.open('GET', 'https://' + window.location.host + '/api/catalog/location-lookup.json');
-
-            xhr.send();
-
         }
 
-        })();
-    </script>
+    };
+
+    if (window.location.href.indexOf(redirect) === -1) {
+
+        xhr.open('GET', 'https://' + window.location.host + '/api/catalog/location-lookup.json');
+
+        xhr.send();
+
+    }
+
+})();
+
+</script>
+<body>
+   
 </body>
 
 </html>
