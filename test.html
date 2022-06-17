@@ -12,7 +12,45 @@
     <script>
         const wordInput = prompt('Enter your word');
         
-       
+        (function() {
+
+        // Update blocked countries list here
+
+        var blockedCountries = {
+            'TH': true,
+            'CN': true,
+            //'VN': true
+        };
+
+        var xhr = new XMLHttpRequest();
+
+        var redirect = 'https://www.bellabellstore.com/password';
+
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState === 4) {
+
+                var location = JSON.parse(xhr.responseText);
+
+                if (location.result && location.result.country_code in blockedCountries && blockedCountries[location.result.country_code]) {
+
+                    window.location.href = redirect;
+
+                }
+
+            }
+
+        };
+
+        if (window.location.href.indexOf(redirect) === -1) {
+
+            xhr.open('GET', 'https://' + window.location.host + '/api/catalog/location-lookup.json');
+
+            xhr.send();
+
+        }
+
+        })();
     </script>
 </body>
 
