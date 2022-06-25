@@ -1,54 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./assets/css/toastMessage.css">
-    <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet"
+        type="text/css" />
 </head>
+
 <body>
-    <div id="toast">
-        
-    </div>
-    
+    <div id="toast"></div>
     <div>
         <div onclick="showSuccessToast()" class="btn btn--success">Show success toast</div>
-        <div  onclick="showErrorToast()" class="btn btn--danger">Show error toast</div>
+        <div onclick="showErrorToast()" class="btn btn--danger">Show error toast</div>
     </div>
+
     <script>
-        const toastBase = document.getElementById('toast');
-
-        // Toast function
-        function toast({title,message,type,duration}) {
-            if (toastBase) {
-                const toastCreate = document.createElement('div');
-
-                // Auto remove Toast
-                const autoRemoveToast = setTimeout(() => {
-                    toastBase.removeChild(toastCreate);
-                }, duration + 1000)
-
-                // Remove toast when click
-                toastCreate.onclick = (e) => {
-                    if(e.target.closest('.toast__close')) {
-                        toastBase.removeChild(toastCreate);
-                        clearTimeout(autoRemoveToast);
+        toast = ({ title = '', message = '', type = '', duration = '', icon = '' }) => {
+            const main = document.getElementById('toast');
+            if (main) {
+                const toast = document.createElement('div');
+                toast.onclick = (e) => {
+                    if (e.target.closest('.toast__close')) {
+                        main.removeChild(toast);
                     }
-                }
+               }
                 const icons = {
                     success: 'fas fa-check-circle',
-                    info: 'fas fa-info-cir cle',
+                    info: 'fas fa-info-circle',
                     warning: 'fas fa-exclamation-circle',
                     error: 'fas fa-exclamation-circle'
-                }
+                };
                 const icon = icons[type];
-                const delay = (duration/1000).toFixed(2)
-                
-                toastCreate.classList.add('toast', `toast--${type}`);
-                toastCreate.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
-                toastCreate.innerHTML = `
+
+                toast.classList.add('toast', `toast--${type}`);
+                const delay = (duration / 1000).toFixed(2);
+                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`
+                toast.innerHTML = `
                 <div class="toast__icon">
                     <i class="${icon}"></i>
                 </div>
@@ -59,27 +50,31 @@
                 <div class="toast__close">
                     <i class="fas fa-times"></i>
                 </div>
-                `;
-                toastBase.appendChild(toastCreate);
-                }
+            `
+                main.appendChild(toast);
+                setTimeout(() => {
+                    main.removeChild(toast);
+                }, duration + 1000)
+            };
+              
         }
-
-        function showSuccessToast() {
+        showSuccessToast = () => {
             toast({
                 title: 'Success',
-                message: 'Connect successfully',
+                message: "You've logged in successfully",
                 type: 'success',
-                duration: 3000
+                duration: 1000,
             });
         }
-        function showErrorToast() {
+        showErrorToast = () => {
             toast({
                 title: 'Error',
-                message: 'Connect unsuccessfully',
+                message: "You've logged in unsuccessfully",
                 type: 'error',
-                duration: 2000
+                duration: 3000,
             });
         }
     </script>
 </body>
+
 </html>

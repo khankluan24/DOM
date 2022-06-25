@@ -80,10 +80,10 @@
          4. CD rotate Done
          5. Next/ prev Done
          6. Random Done
-         7. Next / repeat when ended Done
-         8. Active song Done
-         9. Scroll active song into view  Done
-         10. Play song when click Done
+         7. Next / repeat when ended
+         8. Active song
+         9. Scroll active song into view 
+         10. Play song when click
         */
         const MUSIC_STORAGE_KEY = 'LONG_MUSIC_APP';
 
@@ -105,11 +105,6 @@
             isPlaying: false,
             isRandom: false,
             isRepeat: false,
-            config: JSON.parse(localStorage.getItem(MUSIC_STORAGE_KEY) || {}),
-            setConfig: function(key, value) {
-                this.config[key] = value;
-                localStorage.setItem(MUSIC_STORAGE_KEY, JSON.stringify(this.config))
-            },
             songs: [
                 {
                     name: 'Head of the table',
@@ -134,13 +129,37 @@
                     singer: "Gigi D'Agostino",
                     path: './assets/music/song4.mp3',
                     image: 'https://i.ytimg.com/vi/G3uNcIJAQC4/0.jpg'
-                }
+                },
+                {
+                    name: "Missing You",
+                    singer: "Phương Ly x TINLE",
+                    path: './assets/music/song5.mp3',
+                    image: 'https://i.ytimg.com/vi/pI8KVaHzi8k/hqdefault.jpg'
+                },
+                {
+                    name: "Takeaway",
+                    singer: "The Chainsmokers, ILLENIUM",
+                    path: './assets/music/song6.mp3',
+                    image: 'https://i.ytimg.com/vi/lzkKzZmRZk8/hqdefault.jpg'
+                },
+                {
+                    name: "You broke me first (Gryffin remix)",
+                    singer: "Tate Mcrae",
+                    path: './assets/music/song8.mp3',
+                    image: 'https://i.ytimg.com/vi/4xo_ixoDoU0/hqdefault.jpg'
+                },
+                {
+                    name: "Supergirl",
+                    singer: "Anna Naklab feat. Alle Farben & YouNotUs",
+                    path: './assets/music/song7.mp3',
+                    image: 'https://i.ytimg.com/vi/deqUWwL92vg/hqdefault.jpg'
+                },
             ],
             
-            render: function() {
+            renderSong: function() {
                 const htmls = this.songs.map((song, index) => {
-                    return `
-                    <div class="song ${index === this.currentIndex ? 'active': ''}" data-index = "${index}">
+                    return  `
+                    <div class="song ${index === this.currentIndex ? 'active': ''}" data-index="${index}">
                         <div class="thumb"
                             style="background-image: url(${song.image})">
                         </div>
@@ -151,37 +170,23 @@
                         <div class="option">
                             <i class="fas fa-ellipsis-h"></i>
                         </div>
-                    </div>
-                    `
+                    </div> `
                 })
                 playlist.innerHTML = htmls.join('');
-                
             },
 
             handleEvents: function() {
-                cdWidth = cd.offsetWidth;
-                const _this = this;
-
-                // Xu ly CD quay / dung
-                let cdThumbAnimate = cdThumb.animate(
-                    { transform: 'rotate(360deg)'},
-                    {
-                        duration: 5000,
-                        iterations: Infinity
-                    }
-                )
-                cdThumbAnimate.pause();
-
-                // Xy ly phong to - nho CD
-                document.onscroll = () => {
-                   const scrollTop = window.scrollY || document.documentElement.scrollTop || window.pageYOffset;
-                   const newCdWidth = cdWidth -scrollTop;
-
-                   cd.style.width = newCdWidth > 0 ? newCdWidth + 'px' : 0;
-                   cd.style.opacity = newCdWidth/cdWidth;
+                 let cdWidth = cd.offsetWidth;
+                 const _this = this;
+                
+                 document.onscroll = () => {
+                    const scrollTop = window.scrollY || document.documentElement.scrollTop || window.pageYOffset;
+                    const newCdWidth = cdWidth - scrollTop;
+                    cd.style.width =  newCdWidth > 0 ? newCdWidth + 'px' : 0;
+                    cd.style.opacity = newCdWidth/cdWidth
                 };
 
-                // Xu ly khi click play
+                // Khi song duoc play
                 playBtn.onclick = () => {
                     if(_this.isPlaying) {
                         audio.pause();
@@ -190,78 +195,70 @@
                         audio.play();
                     }
                 };
+                
+                let cdThumbAnimate = cdThumb.animate({transform: 'rotate(360deg)'},{
+                    duration: 3000,
+                    iterations: Infinity
+                });
 
-                // Khi song duoc play
-               audio.onplay= () => {
+                cdThumbAnimate.pause();
+
+                audio.onplay = () => {
                     _this.isPlaying = true;
                     player.classList.add('playing');
                     cdThumbAnimate.play();
-               };
-                // Khi song pause 
-               audio.onpause = () => {
+                };
+
+                audio.onpause = () => {
                     _this.isPlaying = false;
                     player.classList.remove('playing');
                     cdThumbAnimate.pause();
-               };
-               
-               // Hien thi trang thai song
-               audio.ontimeupdate = () => {
-                   const progressPercent = Math.floor(audio.currentTime / audio.duration *100);
-                    if(audio.duration) {
-                        progress.value = progressPercent;
-                    }
-               };
+                };
+
+                //Hien thi trang thai song
+                audio.ontimeupdate = () => {
+                    const progressPercent = Math.floor(audio.currentTime /audio.duration*100);
+                    if(audio.duration) progress.value = progressPercent;
+                };
 
                 // Tua song tren progress
-               progress.onchange = (e) => {
-                    if(e.target.value === 100) {
-                        audio.pause();
-                    } else {
-                       const seekTime = audio.duration /100* e.target.value ;
-                        audio.currentTime = seekTime;              
-                        audio.play();
-                   }
+                progress.onchange = (e) => {
+                    const seekTime = audio.duration /100* e.target.value;
+                    audio.currentTime = seekTime;
+                    audio.play();
                 };
 
-                // Khi next song
                 nextBtn.onclick = () => {
                     if(_this.isRandom) {
-                        _this.playRandomSong();
-                    } else {
-                        _this.nextSong();
+                        _this.playRandomSong(); 
                     }
-                    // Bai hat duoc choi sau 2s
-                    setTimeout(() => {audio.play() },2000);
-                    _this.render();
+                    else {
+                        _this.nextSong(); 
+                    }
+                    audio.play();
+                    _this.renderSong();
                     _this.scrollIntoView();
                 };
-                // Khi prev song
+                
                 prevBtn.onclick = () => {
                     if(_this.isRandom) {
                         _this.playRandomSong();
-                    } else {
+                    }
+                    else {
                         _this.prevSong();
                     }
-                    setTimeout(() => {audio.play() },2000);
-                    _this.render();
+                    audio.play();
+                    _this.renderSong();
                     _this.scrollIntoView();
-
                 };
-
-                // Xu li khi click random
+               
                 randomBtn.onclick = () => {
-                    _this.isRandom = ! _this.isRandom;
-                    _this.setConfig('isRandom', _this.isRandom)
-                    randomBtn.classList.toggle('active', _this.isRandom);
-                    
+                    _this.isRandom = !_this.isRandom;
+                    randomBtn.classList.toggle('active',_this.isRandom)
                 };
 
-                // Xu ly khi bai hat ket thuc 
                 audio.onended = () => {
-                    if(_this.currentIndex === _this.songs.length -1) {
-                        audio.pause();
-                    }
-                    else if(_this.isRepeat) {
+                    if(_this.isRepeat) {
                         audio.play();
                     }
                     else {
@@ -269,52 +266,51 @@
                     }
                 };
 
-                // Xu ly khi lap lai bai hat
                 repeatBtn.onclick = () => {
                     _this.isRepeat = !_this.isRepeat;
-                    _this.setConfig('isRepeat', _this.isRepeat)
                     repeatBtn.classList.toggle('active',_this.isRepeat);
-                    
+                    audio.play();
                 }
 
-                // Xu ly khi chay song click vao song do
                 playlist.onclick = (e) => {
                     const songNode = e.target.closest('.song:not(.active)');
-
                     if(songNode) {
                         if(!e.target.closest('.option')) {
                             _this.currentIndex = parseInt(songNode.dataset.index);
-                           _this.loadCurrentSong();
-                           _this.render()
-                           audio.play();
+                            _this.loadCurrentSong();
+                            _this.renderSong();
+                            audio.play()
                         }
                         else {
-                            console.log('False');
-
+                            console.log(false);
                         }
                     }
+                    
                 };
+            },
 
-                //Dieu chinh volume
-                
+            scrollIntoView: function() {
+                document.querySelector('.song.active').scrollIntoView({
+                    behavior: "smooth",
+                    block:"center"
+                })
             },
 
             nextSong: function() {
                 this.currentIndex ++;
-                if(this.currentIndex === this.songs.length) {
+                if(this.currentIndex === this.songs.length - 1) {
                     this.currentIndex = 0;
                 }
                 this.loadCurrentSong();
             },
 
             prevSong: function() {
-                if(this.currentIndex == 0) {
+                if(this.currentIndex == 0 ) {
                     this.currentIndex = this.songs.length;
                     this.currentIndex --;
                 }
                 else {
                     this.currentIndex --;
-
                 }
                 this.loadCurrentSong();
             },
@@ -328,66 +324,34 @@
                 this.loadCurrentSong();
             },
 
-            scrollIntoView: function() {
-                setTimeout(() => {
-                    document.querySelector('.song.active').scrollIntoView({
-                        // if(this.currentIndex)
-                        behavior: 'smooth',
-                        block: 'nearest',
-                     })
-                }, 300)
-            },
-
-            loadConfig: function() {
-                this.isRandom = this.config.isRandom;
-                this.isRepeat = this.config.isRepeat;
-                // Object.assign(this,this.config)
-            },
-
             defineProperties: function() {
-                Object.defineProperty(this,'currentSong', {
-                    get: () => {
-                        return this.songs[this.currentIndex];
-                    }
+                Object.defineProperty(this, 'currentSong', {
+                    get:() => this.songs[this.currentIndex]
                 })
             },
-            
+
             loadCurrentSong: function() {
-                heading.innerHTML = this.currentSong.name;
+                heading.innerText = this.currentSong.name;
                 cdThumb.style.backgroundImage = `url(${this.currentSong.image})`;
                 audio.src = this.currentSong.path;
-                // Xu ly volume 1 so song
-                const songVolumeDown = {"L'Amour Toujours": true, 'Bad Ideas': false}
-                if(this.currentSong.name in songVolumeDown ) {
-                    audio.volume = 0.1;
-                }
+                const adjustVolume = {'Bad Ideas': true, "L'Amour Toujours":true,'Takeaway': true,'Sign': true};
+                this.currentSong.name in adjustVolume ? audio.volume = 0.2 : audio.volume = 1;
             },
-
+                
             start: function() {
-                // Gan cau hinh tu config vao object
-                this.loadConfig();
+                // Render song
+                this.renderSong();
 
-                // Dinh nghia thuoc tinh object
                 this.defineProperties();
-
-                // Lang nghe cac su kien
-                this.handleEvents();
 
                 this.loadCurrentSong();
 
-                // Render song
-                this.render();
-
-                // Hien thi trang thai cua button repeat vs random
-                randomBtn.classList.toggle('active', this.isRandom)
-                repeatBtn.classList.toggle('active',this.isRepeat)
-                
+                // Xu ly cac su kien
+                this.handleEvents();
             }
         }
 
         app.start();
-
-
 
 
     </script>

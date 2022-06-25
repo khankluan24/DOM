@@ -76,6 +76,14 @@
   .form-group.invalid .form-message {
     color: #f33a58;
   }
+
+  li {
+    list-style: none;
+  }
+
+  .message-item.invalid {
+    color: #f33a58;
+  }
   
   .form-message {
     font-size: 1.2rem;
