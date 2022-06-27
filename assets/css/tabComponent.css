@@ -1,0 +1,21 @@
+.tabs, .tab-content {
+  border: 1px solid #bababa;
+  border-radius: 8px;
+}
+
+.tabs {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.tabs .tab-item {
+  color: black;
+  opacity: 1;
+}
+
+.tab-content {
+  border-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+/*# sourceMappingURL=tabComponent.css.map */

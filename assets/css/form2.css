@@ -1,0 +1,33 @@
+.form-submit {
+  background-color: hsl(203deg, 52%, 50%);
+  border-radius: 4px;
+  margin-top: 0;
+}
+.form-submit:hover {
+  background: hsl(203deg, 52%, 50%);
+}
+.form-submit.invalid {
+  background-color: #9EC7E0;
+  cursor: not-allowed;
+}
+
+.form-group {
+  margin-bottom: 8px;
+}
+.form-group .form-control.success {
+  border-color: #1dbfaf;
+}
+
+.invalid {
+  border-color: #f33a58;
+}
+
+.message-container {
+  text-align: left;
+}
+.message-container .message-item {
+  font-size: 16px;
+  color: #f33a58;
+}
+
+/*# sourceMappingURL=form2.css.map */

@@ -1,0 +1,41 @@
+$buttonColor: hsl(203deg 52% 50%);
+$invalidColor: #f33a58;
+$sucessColor: #1dbfaf;
+
+
+.form-submit {
+    background-color: $buttonColor;
+    border-radius: 4px;
+    margin-top: 0;
+    &:hover {
+        background: $buttonColor;
+    }
+    &.invalid {
+        background-color: #9EC7E0;
+        cursor: not-allowed;
+    }
+}
+
+.form-group {
+    margin-bottom: 8px;
+    & .form-control {
+
+        &.success {
+            border-color: $sucessColor;
+        }
+    }
+}
+
+.invalid {
+    border-color: $invalidColor;
+}
+
+.message-container {
+    text-align: left;
+
+    & .message-item {
+        font-size: 16px;
+        color: $invalidColor;
+    }
+
+}

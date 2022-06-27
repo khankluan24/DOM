@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+      <meta charset=utf-8 />
+      <title>DOM Exercise</title>
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+            integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+            crossorigin="anonymous" />
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="./assets/css/tabUi.css">
+      <link rel="stylesheet" href="./assets/css/tabComponent.css">
+</head>
+
+<body>
+
+      <div class="container">
+            <!-- Tab items -->
+            <div class="tabs">
+                  <div class="tab-item">Description</div>
+                  <div class="tab-item">Specs</div>
+                  <div class="tab-item">Reviews</div>
+            </div>
+
+            <!-- Tab content -->
+            <div class="tab-content">
+                  <div class="tab-pane active"><p>The worlds fastest fidget spinner</p>
+                  </div>
+                  <div class="tab-pane"><p>Slime green, low friction ball bearings, with dual finger grips</p>
+                  </div>
+                  <div class="tab-pane"><p>I have one. It's pretty good.</p>
+                  </div>
+            </div>
+      </div>
+
+      <script>
+          const $ = document.querySelector.bind(document);
+          const $$ = document.querySelectorAll.bind(document);
+
+          const tabItems = $$('.tab-item');
+          const tabPanes = $$('.tab-pane');
+
+        tabItems.forEach((tabItem, index) => {
+            const tabPane = tabPanes[index];
+            tabItem.onclick = () => {
+                $('.tab-pane.active').classList.remove('active');
+                tabPane.classList.add('active');
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // const tabItems = document.querySelectorAll('.tab-item');
+            // const tabPanes = document.querySelectorAll('.tab-pane');
+            // const tabActive = document.querySelector('.tab-item.active');
+            // const line = document.querySelector('.line');
+
+            
+
+            // console.log(tabItems);
+
+
+            // tabItems.forEach((tabItem, index) => {
+            //       const tabPane = tabPanes[index];
+            //       tabItem.onclick = function() {
+            //             document.querySelector('.tab-item.active').classList.remove('active');
+            //             document.querySelector('.tab-pane.active').classList.remove('active');
+                        
+                        
+            //             this.classList.add('active');
+            //             tabPane.classList.add('active');
+
+            //             line.style.width = tabItem.offsetWidth + 'px';
+            //             line.style.left = tabItem.offsetLeft + 'px';
+            //       }
+            // })
+      </script>
+</body>
+
+</html>
