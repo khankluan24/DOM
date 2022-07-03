@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.FB_reactions {
+  border: 1px solid #bfbfbf;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #8c8c8c;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 6px 2px;
+  width: 90px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  flex-flow: column-reverse;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.FB_reactions .text {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 70%;
+}
+.FB_reactions:hover {
+  background-color: #F2F2F2;
+}
+
+/*# sourceMappingURL=reactButton.css.map */

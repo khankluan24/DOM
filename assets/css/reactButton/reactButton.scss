@@ -1,0 +1,59 @@
+// @mixin
+@mixin flexRow($justify: center) {
+    display: flex;
+    align-items: center;
+    @if $justify == center {
+        justify-content: center
+    }
+    @else if $justify == between {
+        justify-content: flex-start
+    }
+    @else if $justify == evenly {
+        justify-content: space-evenly;
+    }
+    @else {
+        justify-content: flex-end
+    }
+}
+
+// Reset CSS 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    @include flexRow(center);
+}
+
+
+.FB_reactions {
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    color: #8c8c8c;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+
+    padding: 6px 2px;
+    width: 90px;
+    
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgb(255 255 255 / 50%);
+    text-transform: uppercase;
+
+    flex-flow: column-reverse;
+    position: relative;
+    @include flexRow(center);
+    .text {
+       @include flexRow(evenly);
+        width: 70%;
+    }
+    &:hover {
+        background-color: #F2F2F2;
+    }
+}
