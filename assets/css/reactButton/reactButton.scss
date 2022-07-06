@@ -1,3 +1,5 @@
+// Variables
+
 // @mixin
 @mixin flexRow($justify: center) {
     display: flex;
@@ -16,6 +18,18 @@
     }
 }
 
+@mixin animation-mixin($name, $from,$to) {
+    @keyframes #{$name} {
+        0% {
+            opacity: 0;
+            transform: $from;
+        }
+        100% {
+            opacity: 1;
+            transform: $to;
+        }
+    }
+}
 // Reset CSS 
 * {
     padding: 0;
@@ -28,7 +42,7 @@ body {
     @include flexRow(center);
 }
 
-
+// Main
 .FB_reactions {
     border: 1px solid #bfbfbf;
     border-radius: 4px;
@@ -56,4 +70,36 @@ body {
     &:hover {
         background-color: #F2F2F2;
     }
+    &:hover .reaction-container {
+        display: flex;
+        animation: topUp ease-in .3s;
+    }
+    .reaction-container {
+        border: 1px solid #0000001a;
+        border-radius: 40px;
+        width: 250px;
+        height: 50px;
+        background-color: #fff;
+        position: absolute;
+        top: -48px;
+        right: -150px;
+        @include flexRow(evenly);
+        display: none;
+        .reaction-item {
+            img {
+                height: 40px;
+                width: auto;
+                vertical-align: middle;
+            }
+            &:hover {
+                transform: scale(1.23) translateY(-3px);
+                transition-property: transform;
+            }
+        }
+
+    }
+    &:hover .reaction-container {
+        display: flex;
+    }
 }
+@include animation-mixin(topUp, translateY(0), translateY(-50px));

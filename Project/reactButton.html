@@ -12,8 +12,9 @@
 <body>
     <a href="#" class="FB_reactions">
         <span class="text">
-            <i class="fas fa-thumbs-up"></i>
-            Like
+            <img src="../assets/Image/like.png" alt="">
+            <p>like</p>
+            
         </span>
         <div class="reaction-container">
             <div class="reaction-item">
@@ -33,6 +34,77 @@
             </div>
         </div>
     </a>
+
+    <script>
+        const infoReact = [
+            {
+                text: 'Like',
+                path:'../assets/Image/like.png'
+            },
+            {
+                text: 'Love',
+                path:'../assets/Image/Love.png'
+            },
+            {
+                text: 'Haha',
+                path:'../assets/Image/laughing.png'
+            },
+            {
+                text: 'Cool',
+                path:'../assets/Image/cool.png'
+            },
+            {
+                text: 'Sad',
+                path:'../assets/Image/sad.png'
+            },
+        ]
+
+        const $ = document.querySelector.bind(document)
+        const $$ = document.querySelectorAll.bind(document)
+
+        const reaction = $('.FB_reactions')
+        const reactItems = $$('.reaction-item');
+        const reactWrapper = $('.reaction-container')
+        const reactText = $('.FB_reactions .text p')
+        const reactIcon = $('.FB_reactions img')
+
+        const changeColor = () => {
+            if (reactText.innerText.toLowerCase() === 'like') {
+                    reactText.style.color ="#1877F2"
+                }
+                else if (reactText.innerText.toLowerCase() === 'love') {
+                    reactText.style.color ="#FF5259" 
+                }
+                else {
+                    reactText.style.color ="#FFD93B"
+                }
+        }
+
+        reaction.onclick = (e) => { 
+            // Xử lý like defaut
+            if(!reactWrapper.contains(e.target)) {
+                infoReact.forEach((item, index) => {
+                    if (item.text === "Like") {
+                       reactText.textContent =item.text
+                       reactIcon.src = item.path
+                       reactText.style.color ="#1877F2"
+                    }
+                })
+            }
+            // Xử lý reaction
+            else {
+                reactItems.forEach((reactItem, index) => {
+                    reactItem.onclick = () => {
+                        reactText.innerText = infoReact[index].text;
+                        reactIcon.src = infoReact[index].path;
+                    }
+                });
+            }      
+            changeColor()
+        }
+
+        
+    </script>
     
 </body>
 </html>

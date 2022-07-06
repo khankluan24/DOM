@@ -16,8 +16,8 @@ body {
   border-radius: 4px;
   cursor: pointer;
   color: #8c8c8c;
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 20px;
   padding: 6px 2px;
   width: 90px;
@@ -34,10 +34,50 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 70%;
+  width: 100%;
 }
 .FB_reactions:hover {
   background-color: #F2F2F2;
 }
+.FB_reactions .reaction-container {
+  border: 1px solid rgba(0, 0, 0, 0.1019607843);
+  border-radius: 40px;
+  width: 250px;
+  height: 50px;
+  background-color: #fff;
+  position: absolute;
+  top: -48px;
+  right: -150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  display: none;
+}
+.FB_reactions .reaction-container .reaction-item img {
+  height: 40px;
+  width: auto;
+  vertical-align: middle;
+}
+.FB_reactions:hover .reaction-container {
+  display: flex;
+  animation: topUp ease-in .3s;
+}
+.reaction-item img:hover {
+  transform: scale(1.23) translateY(-3px);
+  transition-property: transform;
+}
+.text img {
+  width: 20px;
+  height: auto;
+}
 
+@keyframes topUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50px);
+  }
+}
 /*# sourceMappingURL=reactButton.css.map */
