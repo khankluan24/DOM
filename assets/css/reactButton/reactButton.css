@@ -52,6 +52,8 @@ body {
   align-items: center;
   justify-content: space-evenly;
   display: none;
+  -webkit-animation:topUp 5s 15s;
+  animation: topUp 5s 1s;
 }
 .FB_reactions .reaction-container .reaction-item img {
   height: 40px;
@@ -60,24 +62,26 @@ body {
 }
 .FB_reactions:hover .reaction-container {
   display: flex;
-  animation: topUp ease-in .3s;
+  -webkit-animation:topUp 5s 15s;
+    animation: topUp 5s 1s;
+
 }
 .reaction-item img:hover {
   transform: scale(1.23) translateY(-3px);
-  transition-property: transform;
+  transition: transform .15s linear;
 }
 .text img {
   width: 20px;
   height: auto;
 }
-
 @keyframes topUp {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(-50px);
-  }
+    0%{
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100%{
+      opacity: 1;
+      transform: translateY(0);
+    }
 }
 /*# sourceMappingURL=reactButton.css.map */

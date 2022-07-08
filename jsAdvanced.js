@@ -60,7 +60,6 @@
      }
      return logger
  }
- // =============== APP ===============
  
  // Register.js 
  const infoLogger = createLogger('Info')
@@ -73,17 +72,51 @@
  
  errorLogger('Bat dau goi mail');
  errorLogger('Triển khai gởi mail tiếp theo');
+ 
+ function createApp() {
+     const cars = [];
+ 
+     return {
+         add(car) {
+             cars.push(car);
+         },
+         show() {
+             console.log(cars)
+         }
+     }
+ }
+ const app = createApp()
  */
-function createApp() {
-    const cars = [];
 
-    return {
-        add(car) {
-            cars.push(car);
-        },
-        show() {
-            console.log(cars)
-        }
-    }
+// 4. Hoisting
+/**
+ const counter1 = makeCounter()
+ console.log(counter1()) // 1 Do declaration func đc hoist lên đầu
+ function makeCounter() {
+     let counter = 0
+     return increase
+     function increase() {
+         return ++counter
+     }
+ }
+ */
+
+// 5. Strict mode
+/**
+ 'use strict';
+ const student = {}
+ Object.defineProperty(student,'fullName',{
+     value: 'long',
+     writable: false
+ })
+ student.fullName = 'ha pro'
+ console.log(student.fullName)
+ * 
+ */
+let a = 3;
+let b = a;
+console.log(b)
+const bc = {
+
 }
-const app = createApp()
+let long ={...bc}

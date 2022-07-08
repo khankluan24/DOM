@@ -30,3 +30,28 @@ Là 1 hàm có thể ghi nhớ nơi nó được tạo ra và có thể truy c�
 #### Lưu ý:
 - Biến được tham chiếu trong closure sẽ không được xóa khóa bộ nhớ khi hàm cha thực thi xong 
 - Các khái niệm JS nâng cao dễ gây nhầm lẫn
+
+# Hoisting
+Với var khi hoisted, sẽ nhận giá trị undefined.  
+Còn let, const khi hoisted không đc khởi tạo gt và đưa vào temporal dead zone.  
+# Strict mode
+### Cách thêm strict mode. Syntax chung:("use strict") 
+- Thêm vào đầu file js external
+- Thêm vào internal js giữa `<script>`
+- Thêm vào đầu 1 func
+
+### Cách tránh lỗi:
+- Khai báo biến với các từ khóa: var,const,..
+## Công dụng:
+1. Tránh "quên" kw khai báo biến
+2. Tránh trùng tên biến
+3. Sử dụng bộ nhớ hiệu quả vì tránh tạo biến global
+# Value & Preference types (Tham trị và tham chiếu)
+
+## 1. Value types (Primitive data types)
+- String, number,symbol, bigint, null,..
+## 2. Preference types (Non-Primitive data types)
+- Object, array, function
+## Data types with functions
+- Value types  
+- Reference types
