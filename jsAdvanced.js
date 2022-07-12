@@ -113,10 +113,38 @@
  console.log(student.fullName)
  * 
  */
-let a = 3;
-let b = a;
-console.log(b)
-const bc = {
+// 6. This
+/**
+ function Car(name, color) {
+     this.name = name;
+     this.color = color;
+ 
+     // this.run = () => {
+     //     console.log(this)
+     // }
+ }
+ Car.prototype.run = function() {console.log(this)}
+ 
+ const posrche = new Car('Porsche', 'yellow')
+ console.log(posrche.run())
+ * 
+ */
 
-}
-let long ={...bc}
+// 7. call
+/**
+ function logger() {
+     Array.prototype.forEach.call(arguments, item => {
+         console.log(item)
+     })
+ }
+ logger(12,23,13)
+ * 
+ */
+
+// 8. Apply
+
+// Write a JavaScript program to compare two objects to determine 
+// if the first one contains equivalent property values to the second one.
+
+
+
